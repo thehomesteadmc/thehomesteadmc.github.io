@@ -1,1 +1,981 @@
-# thehomesteadmc.github.io
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Homestead at Myrtle Creek</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --linen: #F5F0E8;
+    --warm-stone: #E8DDD0;
+    --walnut: #8B6F52;
+    --dark-earth: #3D2E1E;
+    --sage: #5C7A5E;
+    --cream: #FAF7F2;
+    --muted: #9B8C7E;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--linen);
+    color: var(--dark-earth);
+    font-family: 'Jost', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+  }
+
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 1.25rem 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(245, 240, 232, 0.94);
+    backdrop-filter: blur(8px);
+    border-bottom: 0.5px solid rgba(61,46,30,0.12);
+    transition: box-shadow 0.3s;
+  }
+  .nav-wordmark {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--dark-earth);
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--walnut);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .nav-links a:hover { color: var(--dark-earth); }
+  .nav-tagline {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 5rem;
+  }
+  .hero-left {
+    padding: 6rem 4rem 4rem 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 0.5px;
+    background: var(--sage);
+  }
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(3.2rem, 5vw, 5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    color: var(--dark-earth);
+    margin-bottom: 2rem;
+  }
+  .hero-title em { font-style: italic; color: var(--walnut); }
+  .hero-body {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: var(--muted);
+    max-width: 36ch;
+    margin-bottom: 3rem;
+  }
+  .cta-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--dark-earth);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--walnut);
+    padding-bottom: 0.25rem;
+    transition: gap 0.3s, color 0.3s;
+    width: fit-content;
+  }
+  .cta-link:hover { gap: 1.5rem; color: var(--walnut); }
+  .hero-right { position: relative; overflow: hidden; }
+  .hero-image-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(160deg, var(--warm-stone) 0%, #C8B89A 50%, #A8916E 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+  }
+  .hero-image-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.88rem;
+    color: rgba(61,46,30,0.38);
+    text-align: center;
+    padding: 2rem;
+    line-height: 1.7;
+  }
+  .hero-float-card {
+    position: absolute;
+    bottom: 3rem;
+    left: -2.5rem;
+    background: var(--cream);
+    border: 0.5px solid rgba(61,46,30,0.12);
+    padding: 1.25rem 1.5rem;
+    width: 250px;
+    box-shadow: 0 8px 40px rgba(61,46,30,0.12);
+    animation: float 6s ease-in-out infinite;
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  .float-label {
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 0.5rem;
+  }
+  .float-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1rem;
+    color: var(--dark-earth);
+    line-height: 1.5;
+  }
+
+  .ticker {
+    background: var(--dark-earth);
+    color: var(--linen);
+    padding: 0.75rem 0;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .ticker-inner {
+    display: inline-flex;
+    animation: ticker 32s linear infinite;
+  }
+  .ticker-item {
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 0 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .ticker-dot {
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: var(--sage);
+    display: inline-block;
+  }
+  @keyframes ticker {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  section { padding: 6rem 5rem; }
+  .kicker {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+  .kicker::after {
+    content: '';
+    display: block;
+    width: 2.5rem;
+    height: 0.5px;
+    background: var(--warm-stone);
+  }
+  .section-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--dark-earth);
+    margin-bottom: 1.5rem;
+  }
+  .section-title em { font-style: italic; color: var(--walnut); }
+
+  /* WORLD */
+  .world-section {
+    background: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .world-body {
+    font-size: 0.95rem;
+    line-height: 1.9;
+    color: var(--muted);
+    margin-bottom: 1.25rem;
+  }
+  .world-map {
+    background: var(--warm-stone);
+    border: 0.5px solid rgba(61,46,30,0.1);
+    position: relative;
+    height: 440px;
+    overflow: hidden;
+  }
+  .map-label {
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.75rem;
+    color: var(--dark-earth);
+    opacity: 0.65;
+    line-height: 1.3;
+  }
+  .map-dot {
+    position: absolute;
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--walnut);
+    transform: translate(-50%, -50%);
+  }
+  .map-dot.main {
+    width: 13px; height: 13px;
+    background: var(--dark-earth);
+    box-shadow: 0 0 0 5px rgba(61,46,30,0.14);
+  }
+  .map-river {
+    position: absolute;
+    left: -5%;
+    top: 60%;
+    width: 110%;
+    height: 14px;
+    background: linear-gradient(90deg, transparent, rgba(92,122,94,0.28) 20%, rgba(92,122,94,0.38) 80%, transparent);
+    transform: rotate(-1.5deg);
+    border-radius: 50%;
+  }
+  .map-hill {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(92,122,94,0.1);
+  }
+  .map-road-v {
+    position: absolute;
+    width: 1.5px;
+    background: rgba(61,46,30,0.1);
+  }
+  .map-road-h {
+    position: absolute;
+    height: 1.5px;
+    background: rgba(61,46,30,0.1);
+  }
+
+  /* SHOP */
+  .shop-section { background: var(--warm-stone); }
+  .shop-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 3rem;
+  }
+  .shop-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+  }
+  .shop-card {
+    background: var(--cream);
+    border: 0.5px solid rgba(61,46,30,0.08);
+    overflow: hidden;
+    transition: transform 0.4s, box-shadow 0.4s;
+    cursor: pointer;
+  }
+  .shop-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 40px rgba(61,46,30,0.1);
+  }
+  .shop-img {
+    height: 210px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .shop-img-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.82rem;
+    color: rgba(61,46,30,0.35);
+    text-align: center;
+    padding: 1rem;
+    line-height: 1.6;
+  }
+  .shop-body { padding: 1.5rem; }
+  .shop-cat {
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 0.4rem;
+  }
+  .shop-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--dark-earth);
+    margin-bottom: 0.6rem;
+  }
+  .shop-story {
+    font-size: 0.8rem;
+    line-height: 1.78;
+    color: var(--muted);
+    margin-bottom: 1.1rem;
+  }
+  .shop-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .shop-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.1rem;
+    color: var(--walnut);
+  }
+  .shop-link {
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--dark-earth);
+    text-decoration: none;
+    border-bottom: 0.5px solid var(--walnut);
+    padding-bottom: 0.1rem;
+    transition: color 0.3s;
+  }
+  .shop-link:hover { color: var(--walnut); }
+
+  /* CAST */
+  .cast-section { background: var(--linen); }
+  .cast-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+  .cast-card {
+    background: var(--cream);
+    border: 0.5px solid rgba(61,46,30,0.1);
+    padding: 1.75rem 1.4rem;
+    position: relative;
+    transition: transform 0.4s, box-shadow 0.4s;
+  }
+  .cast-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(61,46,30,0.09);
+  }
+  .cast-card::before {
+    content: attr(data-n);
+    position: absolute;
+    top: 0.9rem;
+    right: 1.1rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.8rem;
+    color: rgba(61,46,30,0.05);
+    font-weight: 300;
+    line-height: 1;
+  }
+  .cast-mono {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    margin-bottom: 1.1rem;
+  }
+  .cast-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--dark-earth);
+    margin-bottom: 0.2rem;
+  }
+  .cast-role {
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 0.9rem;
+  }
+  .cast-bio {
+    font-size: 0.8rem;
+    line-height: 1.8;
+    color: var(--muted);
+    margin-bottom: 1rem;
+  }
+  .cast-whisper {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.84rem;
+    font-style: italic;
+    color: var(--walnut);
+    border-left: 1.5px solid var(--walnut);
+    padding-left: 0.7rem;
+    line-height: 1.6;
+  }
+
+  /* GATHER */
+  .gather-section {
+    background: var(--sage);
+    color: var(--cream);
+    display: grid;
+    grid-template-columns: 1fr 1.15fr;
+    gap: 5rem;
+    align-items: center;
+  }
+  .gather-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2rem, 3.5vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.15;
+    color: var(--cream);
+    margin-bottom: 1.5rem;
+  }
+  .gather-title em { font-style: italic; }
+  .gather-body {
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: rgba(250,247,242,0.65);
+    margin-bottom: 2rem;
+  }
+  .events { display: flex; flex-direction: column; gap: 0; }
+  .event {
+    display: flex;
+    gap: 1.5rem;
+    padding: 1.1rem 0;
+    border-bottom: 0.5px solid rgba(250,247,242,0.14);
+    align-items: flex-start;
+  }
+  .event:last-child { border-bottom: none; }
+  .event-season {
+    font-size: 0.6rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(250,247,242,0.42);
+    flex-shrink: 0;
+    width: 52px;
+    padding-top: 0.2rem;
+  }
+  .event-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--cream);
+    margin-bottom: 0.25rem;
+  }
+  .event-desc {
+    font-size: 0.78rem;
+    color: rgba(250,247,242,0.55);
+    line-height: 1.65;
+  }
+
+  /* HERALD */
+  .herald-section {
+    background: var(--dark-earth);
+    text-align: center;
+    padding: 7rem 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .herald-section::before {
+    content: 'HERALD';
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 19vw;
+    font-weight: 300;
+    color: rgba(245,240,232,0.025);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    letter-spacing: 0.3em;
+    white-space: nowrap;
+    pointer-events: none;
+  }
+  .herald-kicker {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+  .herald-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--linen);
+    margin-bottom: 1.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  .herald-title em { font-style: italic; color: #C8B89A; }
+  .herald-body {
+    font-size: 0.9rem;
+    line-height: 1.9;
+    color: rgba(245,240,232,0.55);
+    max-width: 44ch;
+    margin: 0 auto 2.5rem;
+    position: relative;
+    z-index: 1;
+  }
+  .herald-form {
+    display: flex;
+    max-width: 400px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .herald-input {
+    flex: 1;
+    padding: 0.9rem 1.25rem;
+    background: rgba(245,240,232,0.07);
+    border: 0.5px solid rgba(245,240,232,0.18);
+    color: var(--linen);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.82rem;
+    letter-spacing: 0.04em;
+    outline: none;
+  }
+  .herald-input::placeholder { color: rgba(245,240,232,0.3); }
+  .herald-btn {
+    padding: 0.9rem 1.75rem;
+    background: var(--sage);
+    border: none;
+    color: var(--linen);
+    font-family: 'Jost', sans-serif;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .herald-btn:hover { background: #4A6A4C; }
+  .herald-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.82rem;
+    font-style: italic;
+    color: rgba(245,240,232,0.28);
+    margin-top: 1rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  footer {
+    background: var(--dark-earth);
+    border-top: 0.5px solid rgba(245,240,232,0.07);
+    color: var(--linen);
+    padding: 4rem 5rem;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 3rem;
+  }
+  .footer-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.4rem;
+    font-weight: 300;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.03em;
+    line-height: 1.3;
+  }
+  .footer-tag {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: rgba(245,240,232,0.42);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+  }
+  .footer-addr {
+    font-size: 0.78rem;
+    color: rgba(245,240,232,0.38);
+    line-height: 2;
+  }
+  .footer-col-title {
+    font-size: 0.6rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 1.25rem;
+  }
+  .footer-links { display: flex; flex-direction: column; gap: 0.65rem; }
+  .footer-links a {
+    font-size: 0.82rem;
+    color: rgba(245,240,232,0.5);
+    text-decoration: none;
+    transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--linen); }
+  .footer-bottom {
+    background: #2A1E12;
+    padding: 1.1rem 5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-bottom-copy {
+    font-size: 0.67rem;
+    letter-spacing: 0.08em;
+    color: rgba(245,240,232,0.22);
+  }
+  .footer-bottom-whisper {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 0.82rem;
+    font-style: italic;
+    color: rgba(245,240,232,0.18);
+  }
+
+  .fade-up {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+  .d1 { transition-delay: 0.1s; }
+  .d2 { transition-delay: 0.2s; }
+  .d3 { transition-delay: 0.3s; }
+  .d4 { transition-delay: 0.4s; }
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="#" class="nav-wordmark">The Homestead at Myrtle Creek</a>
+  <ul class="nav-links">
+    <li><a href="#shop">The Shop</a></li>
+    <li><a href="#world">Our World</a></li>
+    <li><a href="#cast">The Neighbors</a></li>
+    <li><a href="#gather">Gather</a></li>
+    <li><a href="#herald">The Herald</a></li>
+  </ul>
+  <span class="nav-tagline">The town's homestead. Everyone's welcome.</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero" style="padding-top:5rem;">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Historic Main Street · Myrtle Creek, Oregon</p>
+    <h1 class="hero-title">A homestead<br>for the <em>whole</em><br>town.</h1>
+    <p class="hero-body">Goods made by hand, furniture built to last, and a door that is never quite all the way closed. The Homestead has been waiting to become what it was always meant to be.</p>
+    <a href="#shop" class="cta-link">Come inside <span>→</span></a>
+    <div class="hero-float-card">
+      <p class="float-label">From the Herald</p>
+      <p class="float-text">"Clement brought lavender in on Tuesday. The shop smelled like the valley for days."</p>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-image-placeholder">
+      <p class="hero-image-label">Your shop front on Historic Main Street<br>— morning light, warm and unhurried</p>
+    </div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-inner">
+    <span class="ticker-item">Historic Main Street <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Myrtle Creek, Oregon <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Goods made by hand <span class="ticker-dot"></span></span>
+    <span class="ticker-item">The door is always open <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Furniture built to last <span class="ticker-dot"></span></span>
+    <span class="ticker-item">The town's homestead <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Everyone's welcome <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Come as you are <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Historic Main Street <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Myrtle Creek, Oregon <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Goods made by hand <span class="ticker-dot"></span></span>
+    <span class="ticker-item">The door is always open <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Furniture built to last <span class="ticker-dot"></span></span>
+    <span class="ticker-item">The town's homestead <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Everyone's welcome <span class="ticker-dot"></span></span>
+    <span class="ticker-item">Come as you are <span class="ticker-dot"></span></span>
+  </div>
+</div>
+
+<!-- WORLD -->
+<section class="world-section" id="world">
+  <div>
+    <p class="kicker fade-up">The world just outside our door</p>
+    <h2 class="section-title fade-up d1">Myrtle Creek<br>is our <em>Barrow's Green.</em></h2>
+    <p class="world-body fade-up d2">The South Umpqua River runs along the western edge of town as it always has. The railroad grade cuts through the hills. The old mill site is a park now, with young myrtle trees growing where the loading dock used to be.</p>
+    <p class="world-body fade-up d2">The church bell rings on Sundays and, twice now, without explanation. The Homestead sits at the center of it all, on the oldest street in town, with the kettle on.</p>
+    <a href="#" class="cta-link fade-up d3">Explore the town <span>→</span></a>
+  </div>
+  <div class="world-map fade-up d2">
+    <div class="map-hill" style="width:200px;height:110px;top:-30px;right:-20px;"></div>
+    <div class="map-hill" style="width:150px;height:90px;top:5px;left:-35px;"></div>
+    <div class="map-hill" style="width:220px;height:110px;bottom:-35px;right:20px;"></div>
+    <div class="map-river"></div>
+    <div class="map-road-v" style="left:42%;top:0;height:100%;"></div>
+    <div class="map-road-h" style="top:38%;left:0;width:100%;transform:rotate(-0.8deg);"></div>
+    <!-- Homestead -->
+    <div class="map-dot main" style="left:42%;top:36%;"></div>
+    <div class="map-label" style="left:45%;top:31%;">The Homestead</div>
+    <!-- Millsite -->
+    <div class="map-dot" style="left:42%;top:53%;background:var(--sage);"></div>
+    <div class="map-label" style="left:45%;top:51%;">Millsite Park</div>
+    <!-- River label -->
+    <div class="map-label" style="left:7%;top:63%;">S. Umpqua River</div>
+    <!-- Church -->
+    <div class="map-dot" style="left:42%;top:74%;background:var(--walnut);"></div>
+    <div class="map-label" style="left:45%;top:72%;">Church on Maple</div>
+    <!-- Rafferty -->
+    <div class="map-dot" style="left:70%;top:18%;background:var(--muted);"></div>
+    <div class="map-label" style="left:60%;top:13%;">Rafferty Farm</div>
+    <!-- Depot -->
+    <div class="map-dot" style="left:70%;top:44%;background:var(--muted);"></div>
+    <div class="map-label" style="left:63%;top:40%;">Old Rail Depot</div>
+    <!-- Hills label -->
+    <div class="map-label" style="left:8%;top:18%;opacity:0.55;">Timber Hills</div>
+    <div style="position:absolute;bottom:0.85rem;right:1rem;font-family:'Cormorant Garamond',serif;font-size:0.72rem;font-style:italic;color:rgba(61,46,30,0.32);">Myrtle Creek, Oregon</div>
+  </div>
+</section>
+
+<!-- SHOP -->
+<section id="shop" class="shop-section">
+  <div class="shop-header">
+    <div>
+      <p class="kicker fade-up">New to the shop</p>
+      <h2 class="section-title fade-up d1" style="margin-bottom:0;">Things worth<br><em>knowing about.</em></h2>
+    </div>
+    <a href="#" class="cta-link fade-up">See everything <span>→</span></a>
+  </div>
+  <div class="shop-grid">
+    <div class="shop-card fade-up d1">
+      <div class="shop-img" style="background:linear-gradient(135deg,#D4C4B0,#B89A7A);">
+        <p class="shop-img-label">Hand-thrown stoneware<br>Jacksonville, OR</p>
+      </div>
+      <div class="shop-body">
+        <p class="shop-cat">Ceramics · Local</p>
+        <p class="shop-name">Stoneware Mug</p>
+        <p class="shop-story">Thrown by a potter in Jacksonville who has been working clay for nearly thirty years. Each one is slightly different. That's the point.</p>
+        <div class="shop-footer">
+          <span class="shop-price">$42</span>
+          <a href="#" class="shop-link">Learn the story →</a>
+        </div>
+      </div>
+    </div>
+    <div class="shop-card fade-up d2">
+      <div class="shop-img" style="background:linear-gradient(135deg,#C8D4C0,#96A88E);">
+        <p class="shop-img-label">Lavender from<br>Clement's farm</p>
+      </div>
+      <div class="shop-body">
+        <p class="shop-cat">From the Valley · Seasonal</p>
+        <p class="shop-name">Dried Lavender Bundle</p>
+        <p class="shop-story">Clement Wharry grows lavender on twelve acres east of town, the same land his grandmother broke ground on in 1948. He brought these in Tuesday.</p>
+        <div class="shop-footer">
+          <span class="shop-price">$18</span>
+          <a href="#" class="shop-link">Meet Clement →</a>
+        </div>
+      </div>
+    </div>
+    <div class="shop-card fade-up d3">
+      <div class="shop-img" style="background:linear-gradient(135deg,#D4C0B0,#B07A5A);">
+        <p class="shop-img-label">Salvaged Oregon timber<br>Oswald Vane</p>
+      </div>
+      <div class="shop-body">
+        <p class="shop-cat">Furniture · Made to Last</p>
+        <p class="shop-name">Salvage Oak Side Table</p>
+        <p class="shop-story">Oswald's workshop is somewhere north of town, up a road that forks twice. This table took as long as it took. It will last longer than you expect.</p>
+        <div class="shop-footer">
+          <span class="shop-price">$340</span>
+          <a href="#" class="shop-link">Find Oswald →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CAST -->
+<section class="cast-section" id="cast">
+  <p class="kicker fade-up">The people of Main Street</p>
+  <h2 class="section-title fade-up d1">Every homestead<br>has its <em>regulars.</em></h2>
+  <div class="cast-grid">
+    <div class="cast-card fade-up d1" data-n="I">
+      <div class="cast-mono" style="background:#E8DDD0;color:#3D2E1E;">ER</div>
+      <p class="cast-name">Eula Rafferty</p>
+      <p class="cast-role">The Regular</p>
+      <p class="cast-bio">Arrives the first Saturday of every month. Takes a slow loop counterclockwise. Never leaves without buying something small.</p>
+      <p class="cast-whisper">She once turned down a serious offer on her farmhouse. She has never spoken of it.</p>
+    </div>
+    <div class="cast-card fade-up d2" data-n="II">
+      <div class="cast-mono" style="background:#D6E8D0;color:#2A4D28;">CW</div>
+      <p class="cast-name">Clement Wharry</p>
+      <p class="cast-role">The Grower</p>
+      <p class="cast-bio">Third-generation farmer, twelve acres east of town. Brings bundles each season. Leaves before anyone can make a fuss over him.</p>
+      <p class="cast-whisper">He does not have a phone. He is reachable by showing up.</p>
+    </div>
+    <div class="cast-card fade-up d3" data-n="III">
+      <div class="cast-mono" style="background:#FAE8C8;color:#5C3A0A;">PB</div>
+      <p class="cast-name">Philippa Breck</p>
+      <p class="cast-role">The Neighbor</p>
+      <p class="cast-bio">Eleven years on Main Street. Knows everyone by name and most by their coffee order. Stops in Wednesday mornings.</p>
+      <p class="cast-whisper">There is a mural dispute with the city. She calls it "historically accurate." The mural remains.</p>
+    </div>
+    <div class="cast-card fade-up d4" data-n="IV">
+      <div class="cast-mono" style="background:#E8D8C0;color:#4A2E10;">OV</div>
+      <p class="cast-name">Oswald Vane</p>
+      <p class="cast-role">The Maker</p>
+      <p class="cast-bio">Nobody knows where his workshop is. He makes furniture from salvaged Oregon timber. Each piece takes as long as it takes.</p>
+      <p class="cast-whisper">He keeps every letter he's ever received in a cigar box. He never mentions them.</p>
+    </div>
+  </div>
+</section>
+
+<!-- GATHER -->
+<section class="gather-section" id="gather">
+  <div>
+    <p class="kicker fade-up" style="color:rgba(250,247,242,0.45);">Millsite Park · Behind the Homestead</p>
+    <h2 class="gather-title fade-up d1">Where the old mill<br>stood, <em>we gather.</em></h2>
+    <p class="gather-body fade-up d2">Just behind the Homestead, where the old timber mill once ran, there is a park now. On certain mornings, when the mist sits low, old-timers say you can still hear the mill. Most likely it is the river. Most likely.</p>
+    <a href="#" class="cta-link fade-up d3" style="color:var(--cream);border-color:rgba(250,247,242,0.35);">See the calendar <span>→</span></a>
+  </div>
+  <div class="events fade-up d2">
+    <div class="event">
+      <span class="event-season">Spring</span>
+      <div>
+        <p class="event-name">The Millsite Awakening</p>
+        <p class="event-desc">The first gathering of the year, held when the myrtle trees begin to leaf. Makers, local growers, long tables, the kettle on.</p>
+      </div>
+    </div>
+    <div class="event">
+      <span class="event-season">Summer</span>
+      <div>
+        <p class="event-name">The Main Street Evening</p>
+        <p class="event-desc">Shops open late, lanterns between the buildings. Philippa Breck organizing something that will go perfectly or become a story told for years. Usually both.</p>
+      </div>
+    </div>
+    <div class="event">
+      <span class="event-season">Fall</span>
+      <div>
+        <p class="event-name">The Harvest Table</p>
+        <p class="event-desc">A long dinner in Millsite Park. Clement brings what the farm produced. Oswald builds the table. Eula arrives first and leaves last.</p>
+      </div>
+    </div>
+    <div class="event">
+      <span class="event-season">Winter</span>
+      <div>
+        <p class="event-name">The Homestead Holiday</p>
+        <p class="event-desc">Candles in the windows, the shop warm against the December dark. The bell ringing without explanation. The whole town finds its way to Main Street.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HERALD -->
+<section class="herald-section" id="herald">
+  <p class="herald-kicker">The Homestead Herald</p>
+  <h2 class="herald-title">A letter from<br><em>Main Street,</em><br>once a month.</h2>
+  <p class="herald-body">Not a newsletter. Not a promotion. A letter from the homestead — what's new in the shop, whose hands made it, what the valley looks like right now, and the occasional bit of news from the neighbors.</p>
+  <div class="herald-form">
+    <input class="herald-input" type="email" placeholder="your@email.com">
+    <button class="herald-btn">Subscribe</button>
+  </div>
+  <p class="herald-note">You can unsubscribe anytime. No hard feelings.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <p class="footer-name">The Homestead<br>at Myrtle Creek</p>
+    <p class="footer-tag">"The town's homestead.<br>Everyone's welcome."</p>
+    <p class="footer-addr">Historic Main Street<br>Myrtle Creek, Oregon<br><br>Tues–Sat · 10am–5pm<br>Sunday · 11am–4pm</p>
+  </div>
+  <div>
+    <p class="footer-col-title">Explore</p>
+    <div class="footer-links">
+      <a href="#">The Shop</a>
+      <a href="#">Furniture</a>
+      <a href="#">Local Makers</a>
+      <a href="#">Gifts & Home Goods</a>
+      <a href="#">Antiques & Vintage</a>
+    </div>
+  </div>
+  <div>
+    <p class="footer-col-title">The World</p>
+    <div class="footer-links">
+      <a href="#">Our Story</a>
+      <a href="#">The Neighbors</a>
+      <a href="#">Millsite Park</a>
+      <a href="#">Gather & Events</a>
+      <a href="#">The Herald</a>
+    </div>
+  </div>
+  <div>
+    <p class="footer-col-title">Find Us</p>
+    <div class="footer-links">
+      <a href="#">Instagram</a>
+      <a href="#">Facebook</a>
+      <a href="#">Directions</a>
+      <a href="#">Contact</a>
+    </div>
+  </div>
+</footer>
+<div class="footer-bottom">
+  <span class="footer-bottom-copy">© The Homestead at Myrtle Creek · Myrtle Creek, Oregon</span>
+  <span class="footer-bottom-whisper">The door is always open.</span>
+</div>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(el => { if (el.isIntersecting) el.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  window.addEventListener('scroll', () => {
+    document.getElementById('nav').style.boxShadow =
+      window.scrollY > 50 ? '0 2px 24px rgba(61,46,30,0.09)' : 'none';
+  });
+</script>
+</body>
+</html>
